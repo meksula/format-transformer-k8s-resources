@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: format-transformer-deployment
-  namespace: format-transformer-domain-apps
+  namespace: ft
   labels:
     app: format-transformer
 spec:
