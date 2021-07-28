@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: format-transformer-ingress-traefik
+  namespace: format-transformer-domain-apps
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - http:
+      paths:
+        - path: "/"
+          pathType: Prefix
+          backend:
+            service:
+              name: format-transformer-panel-service
+              port:
+                number: 80
+        - path: "/api/v1"
+          pathType: Prefix
+          backend:
+            service:
+              name: format-transformer-service
+              port:
+                number: 8080

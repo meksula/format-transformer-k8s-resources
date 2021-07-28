@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: format-transformer-deployment
+  namespace: format-transformer-domain-apps
+  labels:
+    app: format-transformer
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: format-transformer
+  template:
+    metadata:
+      labels:
+        app: format-transformer
+    spec:
+      containers:
+      - name: format-transformer
+        image: meksula/format-transformer:latest
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: Always
+      hostAliases:
+      - ip: "10.43.104.150"
+        hostnames:
+        - "rabbitmq.io"      
