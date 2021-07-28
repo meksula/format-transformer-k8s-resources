@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: format-transformer-ingress-traefik
-  namespace: format-transformer-domain-apps
+  namespace: ft
   annotations:
     kubernetes.io/ingress.class: "traefik"
 spec:
