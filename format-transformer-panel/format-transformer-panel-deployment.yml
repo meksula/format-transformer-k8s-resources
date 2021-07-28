@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: format-transformer-panel-deployment
+  namespace: format-transformer-domain-apps
+  labels:
+    app: format-panel-transformer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: format-transformer-panel
+  template:
+    metadata:
+      labels:
+        app: format-transformer-panel
+    spec:
+      containers:
+      - name: format-transformer-panel
+        image: meksula/format-transformer-panel:v1.0.0
+        ports:
+        - name: web
+          containerPort: 80
+          protocol: TCP
+      restartPolicy: Always
