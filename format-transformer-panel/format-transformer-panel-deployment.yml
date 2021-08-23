@@ -6,7 +6,7 @@ metadata:
   labels:
     app: format-panel-transformer
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: format-transformer-panel
