@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: format-transformer-gateway-deployment
+  namespace: ft-backend
+  labels:
+    app: format-transformer-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: format-transformer-gateway
+  template:
+    metadata:
+      labels:
+        app: format-transformer-gateway
+    spec:
+      containers:
+      - name: format-transformer-gateway
+        image: meksula/format-transformer-gateway:v1.0.3-rc
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: TCP
+        env:
+        - name: SPRING_PROFILE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: format-transformer-cm
+              key: spring-profile-name
+        - name: FORMAT_TRANSFORMER_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: format-transformer-microservices-hosts
+              key: format-transformer-host
+        - name: FORMAT_TRANSFORMER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: format-transformer-microservices-hosts
+              key: format-transformer-port
+        - name: FORMAT_TRANSFORMER_STATS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: format-transformer-microservices-hosts
+              key: format-transformer-stats-host
+        - name: FORMAT_TRANSFORMER_STATS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: format-transformer-microservices-hosts
+              key: format-transformer-stats-port
+      restartPolicy: Always

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: format-transformer-panel-deployment
-  namespace: format-transformer-domain-apps
+  namespace: ft-frontend
   labels:
     app: format-panel-transformer
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: format-transformer-panel
-        image: meksula/format-transformer-panel:v1.0.0
+        image: meksula/format-transformer-panel:v1.0.1-rc
         ports:
         - name: web
           containerPort: 80

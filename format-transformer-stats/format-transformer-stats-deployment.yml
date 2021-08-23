@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: format-transformer-deployment
+  name: format-transformer-stats-deployment
   namespace: ft-backend
   labels:
-    app: format-transformer
+    app: format-transformer-stats
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: format-transformer
+      app: format-transformer-stats
   template:
     metadata:
       labels:
-        app: format-transformer
+        app: format-transformer-stats
     spec:
       containers:
-      - name: format-transformer
-        image: meksula/format-transformer:v1.0.4-lettuce
+      - name: format-transformer-stats
+        image: meksula/format-transformer-stats:v1.0.5-rc
         ports:
         - name: web
           containerPort: 8080
@@ -28,14 +28,14 @@ spec:
             configMapKeyRef:
               name: format-transformer-cm
               key: spring-profile-name
-        - name: MESSAGE_BROKER_HOST
+        - name: FORMAT_TRANSFORMER_PERSISTER_HOST
           valueFrom:
             configMapKeyRef:
-              name: format-transformer-cm
-              key: message-broker-host
-        - name: CACHE_HOST
+              name: format-transformer-microservices-hosts
+              key: format-transformer-persister-host
+        - name: FORMAT_TRANSFORMER_PERSISTER_PORT
           valueFrom:
             configMapKeyRef:
-              name: format-transformer-cm
-              key: cache-host
+              name: format-transformer-microservices-hosts
+              key: format-transformer-persister-port
       restartPolicy: Always

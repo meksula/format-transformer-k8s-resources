@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: format-transformer-microservices-hosts
+  namespace: ft-backend
+data:
+  format-transformer-host: format-transformer-service.ft-backend.svc.cluster.local
+  format-transformer-port: "8080"
+  format-transformer-persister-host: format-transformer-persister-service.ft-backend.svc.cluster.local
+  format-transformer-persister-port: "8080"
+  format-transformer-stats-host: format-transformer-stats-service.ft-backend.svc.cluster.local
+  format-transformer-stats-port: "8080"
